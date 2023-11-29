@@ -5,17 +5,17 @@ def solution(filename):
     Expected return value is a dict
     """
     # Initialize variables
-    shortest_words = []
-    longest_words = []
-    letter_count = {}
-    word_count = 0
-    line_count = 0
+    shortest_words = []  # List to store the shortest words
+    longest_words = []   # List to store the longest words
+    letter_count = {}    # Dictionary to count occurrences of each letter/symbol
+    word_count = 0       # Variable to count the total number of words
+    line_count = 0       # Variable to count the total number of lines
 
     # Open the file and process its content
     with open(filename, 'r') as file:
         for line in file:
             line_count += 1
-            words = line.split()
+            words = line.split()  # Split the line into words
 
             for word in words:
                 # Check word length for shortest and longest words
@@ -62,7 +62,7 @@ def solution(filename):
     }
 
 # Example usage:
-filename = "./minion-submissions/minion-1.txt"  # Replace with the actual file name
+filename = "./minion-submissions/minion-2.txt" 
 result = solution(filename)
 print("\nReturned Data:")
 print(result)

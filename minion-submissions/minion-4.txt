@@ -1,0 +1,16 @@
+Python 3.12 is the latest stable release of the Python programming language, with a mix of changes to the language and the standard library. The library changes focus on cleaning up deprecated APIs, usability, and correctness. Of note, the distutils package has been removed from the standard library. Filesystem support in os and pathlib has seen a number of improvements, and several modules have better performance.
+
+The language changes focus on usability, as f-strings have had many limitations removed and ‘Did you mean …’ suggestions continue to improve. The new type parameter syntax and type statement improve ergonomics for using generic types and type aliases with static type checkers.
+
+This article doesn’t attempt to provide a complete specification of all new features, but instead gives a convenient overview. For full details, you should refer to the documentation, such as the Library Reference and Language Reference. If you want to understand the complete implementation and design rationale for a change, refer to the PEP for a particular new feature; but note that PEPs usually are not kept up-to-date once a feature has been fully implemented.
+
+The value of type aliases and the bound and constraints of type variables created through this syntax are evaluated only on demand (see lazy evaluation). This means type aliases are able to refer to other types defined later in the file.
+
+Type parameters declared through a type parameter list are visible within the scope of the declaration and any nested scopes, but not in the outer scope. For example, they can be used in the type annotations for the methods of a generic class or in the class body. However, they cannot be used in the module scope after the class is defined. See Type parameter lists for a detailed description of the runtime semantics of type parameters.
+
+In order to support these scoping semantics, a new kind of scope is introduced, the annotation scope. Annotation scopes behave for the most part like function scopes, but interact differently with enclosing class scopes. In Python 3.13, annotations will also be evaluated in annotation scopes.
+
+We began using Python at Webucator in 2015. As most of our larger programming projects have to do with building web-based applications and we had long ago decided on our web stack, we haven't needed Python for any large scale projects. However, we use it regularly to quickly solve problems and to automate manual tasks. In this article, I'll describe how we used Python to automate a problem that occurred infrequently, but was a huge nuisance when it did occur.
+
+As an IT training company, we write a lot of courseware with many code examples, which are both included in the class files and embedded in the course manual. To avoid having to maintain the code both in the file and the manual, our build system, which is XML-based, reads the class files into the manual. To make that work, we have to mark up each class file with XML before committing it. Here is a sample of a marked-up courseware file:
+
